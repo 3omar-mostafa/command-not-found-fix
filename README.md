@@ -26,6 +26,14 @@ E: Sub-process returned an error code
 
 The solution is that is the file is compressed we just decpress it into a tmp file and use it
 
+# Installtion
+* Install lz4 package `sudo apt install python3-lz4` or `sudo pip3 install lz4`
+* Copy and replace my modified `creator.py` to `/usr/lib/python3/dist-packages/CommandNotFound/db/creator.py`
+
+## One-line installation:
+```bash
+sudo apt install python3-lz4; sudo wget -O /usr/lib/python3/dist-packages/CommandNotFound/db/creator.py 'https://raw.githubusercontent.com/3omar-mostafa/command-not-found-fix/main/creator.py'
+```
 
 # More Info
 * https://askubuntu.com/questions/1308270/acquiregzipindexes-causes-apt-to-fail
