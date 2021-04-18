@@ -9,6 +9,9 @@ import sys
 import time
 
 import apt_pkg
+import lz4.frame
+import tempfile
+
 apt_pkg.init()
 
 # TODO:
@@ -134,6 +137,12 @@ class DbCreator:
         return meta
     def _fill_commands(self, con):
         for f in self.files:
+            if f.lower().endswith(".lz4"):
+                with lz4.frame.open(f, mode='rt', encoding='UTF-8', errors='strict', newline='\n') as compressed :
+                    f = tempfile.NamedTemporaryFile(mode="w", delete=False)
+                    f.write(compressed.read())
+                    f = f.name
+
             with open(f) as fp:
                 self._parse_single_commands_file(con, fp)
         self.stats["total_time"] = time.time() - self.stats["total_time"]
